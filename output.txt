@@ -1,0 +1,2 @@
+This is regarding the write file using sync file system: My name is deepak kumar, i am from jhunjhunu district and currently learning nodejs and mongodb .. 
+ Created on:- 1599587954297
