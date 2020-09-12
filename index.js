@@ -29,6 +29,11 @@ const url = require('url'); //used to analyze url
 
 /*---- SERVER ----*/
 
+//top level code, it will executed once when we start the program
+//in case when we read the same file data on each request
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8'); 
+const dataObj = JSON.parse(data);   
+
 const server = http.createServer((req, res) => {
     //console.log(req); //to show the request details
     //console.log(req.url); //to show the actual url
@@ -41,6 +46,12 @@ const server = http.createServer((req, res) => {
     else if(pathName === '/product'){
         res.end("This is the PRODUCT");
     }
+    else if(pathName === '/api'){
+            res.writeHead(200, {
+                'Content-type': 'application/json'
+            }); 
+            res.end(data);
+    }
     else{
         res.writeHead(404, {
             'Content-type': 'text/html',
@@ -49,7 +60,7 @@ const server = http.createServer((req, res) => {
         res.end("<h1>Page not found</h1>");
     }
     //console.log("Hello from the server");
-    console.log(res);
+   // console.log(res);
 }); 
 
 server.listen(3000, '127.0.0.1', () => {
